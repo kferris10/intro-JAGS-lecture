@@ -3,7 +3,9 @@ library(Lahman)
 library(dplyr)
 library(lubridate)
 
-# selecting 20 most prolific players and calculating wOBA
+# cleaning ----------------------------------------------
+
+# selecting players who played at least 20 seasons and calculating wOBA
 bat <- Batting %>% 
   tbl_df() %>% 
   filter(yearID >= 1920, AB > 100, !is.na(AB)) %>% 
@@ -31,10 +33,14 @@ dat <- bat %>%
   mutate(age = interval(bday, ymd(paste0(yearID, "-6-30"))) / eyears(1)) %>% 
   select(playerID, yearID, age, woba)
 
+# orthogonal polynomial of age ------------------------------
+
 # decomposing age into orthogonal polynomials of order 2
 poly_age <- poly(dat$age, 2)
 to_combine <- as.matrix(poly_age) %>% data.frame() %>% setNames(c("a1", "a2"))
 dat2 <- cbind(dat, to_combine) %>% tbl_df()
+
+# saving --------------------------------------------------
 
 # saving data.frame of player-stats to fit in JAGS
 setwd("~/Teaching/Stat-506/JAGS-lecture")

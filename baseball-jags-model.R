@@ -1,12 +1,15 @@
 
-library(R2jags)
+library(R2jags)   ## to call JAGS from R
 library(plyr)     ## always load plyr before dplyr
 library(dplyr)
 set.seed(42)
 
-setwd("~/Teaching/Stat-506/JAGS-lecture")
+# loading data
+setwd("wherever")
 dat <- read.csv("clean-baseball.csv") %>% tbl_df()
 
+# JAGS ----------------------------------------------
+# saving JAGS model as a .txt file
 cat("
 model {
   # likelihood
