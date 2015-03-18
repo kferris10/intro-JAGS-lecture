@@ -1,0 +1,20 @@
+
+model {
+  # likelihood
+  for(i in 1:N) {
+    y[i] ~ dnorm(yhat[i], tau_y)
+    yhat[i] <- beta0 + beta1 * age[i] + beta2 * age2[i] + b[player[i]]
+  }
+  for(j in 1:J) {
+    b[j] ~ dnorm(0, tau_b)
+  }
+  
+  # priors
+  beta0 ~ dnorm(0, .001)
+  beta1 ~ dnorm(0, .001)
+  beta2 ~ dnorm(0, .001)
+  tau_y <- pow(sigma_y, -2)
+  sigma_y ~ dunif(0, 1000)
+  tau_b <- pow(sigma_b, -2)
+  sigma_b ~ dunif(0, 1000)
+}
