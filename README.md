@@ -5,6 +5,7 @@ This repository contains the materials for a lecture that I gave in STAT 506 at 
 The materials in this repository are:
 
 - `jags-models-by-hand.pdf`: The notes I used to practice writing out JAGS models by hand.
+- `baseball-handout.pdf`: The handout used to motivate the baseball data.
 - `clean-baseball.R`: The R code used to obtain and clean the baseball data from the `Lahman` package for this example.
 - `clean-baseball.csv`: A .csv file of the cleaned baseball data.
 - `baseball-age-polynomials`: A saved .RData object containing the model for the orthogonal polynomials.  Used to plot the aging curve.
